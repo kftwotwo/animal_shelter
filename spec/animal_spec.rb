@@ -85,6 +85,17 @@ describe(Animal) do
       expect(Animal.all_sorted_by("date")).to eq [@bugs, @taz, @porky, @daffy]
     end
   end
+
+
+  describe '.adopted_by' do
+      it "add a owner to a pet" do
+        @kevin = Person.new({:name => "Kevin", :phone => '406-555-5678', :type_pref => 'dog', :breed_pref => 'labs'})
+        @bugs.save
+        @bugs.adopted_by(@kevin)
+        expect(@bugs.person_id).to eq @kevin.id
+      end
+  end
+
   # TODO: Add method to add person to Animal
 
 end

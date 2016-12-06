@@ -57,5 +57,9 @@ class Animal
     @gender == other.gender
   end
 
+  def adopted_by(person)
+    @person_id = person.id
+  end
+
 
 end

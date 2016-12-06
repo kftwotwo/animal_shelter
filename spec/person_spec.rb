@@ -33,6 +33,14 @@ describe Person  do
       @person.save()
       expect(Person.all).to be_an_instance_of(Array)
     end
+
+    it "will update entries that already exist" do
+      @person2.save
+      @person2.save
+      person2_id = @person2.id
+      expect(Person.all.first).to eq @person2
+      expect(Person.all.first.id.to_i).to eq person2_id
+    end
   end
 
   describe '.all' do

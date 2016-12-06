@@ -8,6 +8,7 @@ describe(Animal) do
       :breed => "Mutant",
       :gender => "Male"
     })
+
     @daffy = Animal.new({
       :name => "Daffy",
       :type => "Duck",
@@ -15,6 +16,7 @@ describe(Animal) do
       :gender => "Male"
     })
   end
+
   describe '#initialize' do
     it 'initializes basic properties' do
       expect(@bugs.name).to eq "Bugs"
@@ -42,13 +44,9 @@ describe(Animal) do
     it "will return false if and of the name, breed, type, or gender don't match" do
       expect(@bugs == @daffy).to eq false
     end
-
-    it "will return false if and of the name, breed, type, or gender don't match" do
-      @bugs2 = Animal.new({:name => "Bugs", :type => "Bunny", :breed => "Mutant", :gender => "Male"})
-      @bugs2.save
-      expect(@bugs == @bugs2).to eq true
-    end
   end
-
+  # TODO: Add sort methods name, type, breed, and date
+  # TODO: Add method to add person to Animal
+  # TODO: Add method to update / fix save method so it updates
 
 end

@@ -25,12 +25,19 @@ class Person
   end
 
   def save
-    saved = DB.exec("INSERT INTO  people (name, phone, type_pref, breed_pref) VALUES ('#{@name}', '#{@phone}', '#{@type_pref}', '#{@breed_pref}');")
+    if @id == nil
+      saved = DB.exec("INSERT INTO  people (name, phone, type_pref, breed_pref) VALUES ('#{@name}', '#{@phone}', '#{@type_pref}', '#{@breed_pref}') RETURNING id;")
+      @id = saved.first["id"].to_i
+    else
+      DB.exec("UPDATE people SET name = '#{@name}', phone = '#{@phone}', type_pref = '#{@type_pref}', breed_pref = '#{@breed_pref}' WHERE id = #{@id};")
+    end
   end
 
   def ==(other)
     @name == other.name and \
     @phone == other.phone
   end
+  # TODO: Add method to update / fix save method so it updates
+  # TODO: Add method to list customers by breed preference
 
 end

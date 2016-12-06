@@ -29,7 +29,12 @@ class Animal
   end
 
   def save
-    saved = DB.exec("INSERT INTO  animals (name, type, gender, breed, date, person_id) VALUES ('#{@name}', '#{@type}', '#{@gender}', '#{@breed}', #{@date or "NULL"}, #{@person_id or "NULL"});")
+    if @id == nil
+    saved = DB.exec("INSERT INTO  animals (name, type, breed, gender, date, person_id) VALUES ('#{@name}', '#{@type}', '#{@breed}', '#{@gender}', #{@date or 'NULL'}, #{@person_id or 'NULL'}) RETURNING id;")
+      @id = saved.first["id"].to_i
+    else
+      DB.exec("UPDATE animals SET name = '#{@name}', type = '#{@type}', breed = '#{@breed}', gender = '#{@gender}', date = #{@date or 'NULL'}, person_id = #{@person_id or 'NULL'} WHERE id = #{@id};")
+    end
   end
 
   def ==(other)

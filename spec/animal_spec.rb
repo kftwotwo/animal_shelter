@@ -31,6 +31,14 @@ describe(Animal) do
       @bugs.save()
       expect(Animal.all).to be_an_instance_of(Array)
     end
+
+    it "will update animals that already exist" do
+      @bugs.save
+      @bugs.save
+      bugs2_id = @bugs.id
+      expect(Animal.all.first).to eq @bugs
+      expect(Animal.all.first.id.to_i).to eq bugs2_id
+    end
   end
 
   describe '.all' do

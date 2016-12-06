@@ -8,6 +8,12 @@ describe(Animal) do
       :breed => "Mutant",
       :gender => "Male"
     })
+    @daffy = Animal.new({
+      :name => "Daffy",
+      :type => "Duck",
+      :breed => "Mutant",
+      :gender => "Male"
+    })
   end
   describe '#initialize' do
     it 'initializes basic properties' do
@@ -17,4 +23,32 @@ describe(Animal) do
       expect(@bugs.gender).to eq "Male"
     end
   end
+
+  describe '#save' do
+    it "will save the into the database" do
+      @bugs.save()
+      expect(Animal.all).to be_an_instance_of(Array)
+    end
+  end
+
+  describe '.all' do
+    it "will list out all animals in the database" do
+      @bugs.save()
+      expect(Animal.all).to eq [@bugs]
+    end
+  end
+
+  describe '#==' do
+    it "will return false if and of the name, breed, type, or gender don't match" do
+      expect(@bugs == @daffy).to eq false
+    end
+
+    it "will return false if and of the name, breed, type, or gender don't match" do
+      @bugs2 = Animal.new({:name => "Bugs", :type => "Bunny", :breed => "Mutant", :gender => "Male"})
+      @bugs2.save
+      expect(@bugs == @bugs2).to eq true
+    end
+  end
+
+
 end

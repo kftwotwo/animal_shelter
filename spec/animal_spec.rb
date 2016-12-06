@@ -96,6 +96,4 @@ describe(Animal) do
       end
   end
 
-  # TODO: Add method to add person to Animal
-
 end

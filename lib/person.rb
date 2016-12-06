@@ -22,6 +22,18 @@ class Person
         })
       end
     end
+
+    def adoptees_for(animal)
+      DB.exec("Select * FROM people WHERE breed_pref = '#{animal.breed}' AND type_pref = '#{animal.type}';").map do |person|
+        Person.new({
+          :id => person["id"],
+          :name => person["name"],
+          :phone => person["phone"],
+          :type_pref => person["type_pref"],
+          :breed_pref => person["breed_pref"],
+        })
+      end
+    end
   end
 
   def save

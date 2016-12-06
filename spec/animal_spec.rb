@@ -6,15 +6,34 @@ describe(Animal) do
       :name => "Bugs",
       :type => "Bunny",
       :breed => "Mutant",
-      :gender => "Male"
+      :gender => "Male",
+      :date => "2016-01-01"
     })
 
     @daffy = Animal.new({
       :name => "Daffy",
       :type => "Duck",
       :breed => "Mutant",
-      :gender => "Male"
+      :gender => "Male",
+      :date => "2016-12-22"
     })
+
+    @taz = Animal.new({
+      :name => "Taz",
+      :type => "Tazmanian Devil",
+      :breed => "Red Bull",
+      :gender => "Male",
+      :date => "2016-03-12"
+    })
+
+    @porky = Animal.new({
+      :name => "Porky",
+      :type => "Pig",
+      :breed => "Bacon",
+      :gender => "Male",
+      :date => "2016-05-23"
+    })
+
   end
 
   describe '#initialize' do
@@ -53,8 +72,19 @@ describe(Animal) do
       expect(@bugs == @daffy).to eq false
     end
   end
-  # TODO: Add sort methods name, type, breed, and date
+
+  describe '.all_sorted_by' do
+    it "will return a sorted list of animals given a valid argument" do
+      @bugs.save
+      @daffy.save
+      @taz.save
+      @porky.save
+      expect(Animal.all_sorted_by("name")).to eq [@bugs, @daffy, @porky, @taz]
+      expect(Animal.all_sorted_by("type")).to eq [@bugs, @daffy, @porky, @taz]
+      expect(Animal.all_sorted_by("breed")).to eq [@porky, @bugs, @daffy, @taz]
+      expect(Animal.all_sorted_by("date")).to eq [@bugs, @taz, @porky, @daffy]
+    end
+  end
   # TODO: Add method to add person to Animal
-  # TODO: Add method to update / fix save method so it updates
 
 end

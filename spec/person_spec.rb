@@ -55,5 +55,6 @@ describe Person  do
       expect(@person == @person2).to eq false
     end
   end
+  # TODO: Add method to list customers by breed preference
 
 end

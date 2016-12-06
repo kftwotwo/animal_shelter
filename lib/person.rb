@@ -37,7 +37,5 @@ class Person
     @name == other.name and \
     @phone == other.phone
   end
-  # TODO: Add method to update / fix save method so it updates
-  # TODO: Add method to list customers by breed preference
 
 end

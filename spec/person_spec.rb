@@ -28,4 +28,24 @@ describe Person  do
     end
   end
 
+  describe '#save' do
+    it "will save the into the database" do
+      @person.save()
+      expect(Person.all).to be_an_instance_of(Array)
+    end
+  end
+
+  describe '.all' do
+    it "will list out all animals in the database" do
+      @person.save()
+      expect(Person.all).to eq [@person]
+    end
+  end
+
+  describe '#==' do
+    it "will return false if the name or phone don't match" do
+      expect(@person == @person2).to eq false
+    end
+  end
+
 end

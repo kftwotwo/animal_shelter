@@ -33,7 +33,6 @@ describe(Animal) do
       :gender => "Male",
       :date => "2016-05-23"
     })
-
   end
 
   describe '#initialize' do
@@ -88,12 +87,11 @@ describe(Animal) do
 
 
   describe '.adopted_by' do
-      it "add a owner to a pet" do
-        @kevin = Person.new({:name => "Kevin", :phone => '406-555-5678', :type_pref => 'dog', :breed_pref => 'labs'})
-        @bugs.save
-        @bugs.adopted_by(@kevin)
-        expect(@bugs.person_id).to eq @kevin.id
-      end
+    it "add a owner to a pet" do
+      @kevin = Person.new({:name => "Kevin", :phone => '406-555-5678', :type_pref => 'dog', :breed_pref => 'labs'})
+      @bugs.save
+      @bugs.adopted_by(@kevin)
+      expect(@bugs.person_id).to eq @kevin.id
+    end
   end
-
 end

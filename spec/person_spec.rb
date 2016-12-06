@@ -24,6 +24,7 @@ describe Person  do
       :breed_pref => 'labs'
     })
   end
+  
   describe '#initialize'  do
     it "will return name and phone" do
       expect(@kenny.name).to eq "Kenny"
@@ -85,8 +86,4 @@ describe Person  do
       expect(Person.adoptees_for(@fido)).to eq [@alis, @kevin]
     end
   end
-
-
-  # TODO: Add method to list customers by breed preference
-
 end

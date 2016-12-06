@@ -34,7 +34,7 @@ class Person
         })
       end
     end
-  end
+  end #end of singleton
 
   def save
     if @id == nil
@@ -49,5 +49,4 @@ class Person
     @name == other.name and \
     @phone == other.phone
   end
-
 end

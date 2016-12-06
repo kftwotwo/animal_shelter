@@ -39,7 +39,7 @@ class Animal
         })
       end
     end
-  end
+  end #end of singleton
 
   def save
     if @id == nil
@@ -60,6 +60,4 @@ class Animal
   def adopted_by(person)
     @person_id = person.id
   end
-
-
 end

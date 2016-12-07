@@ -11,8 +11,27 @@ class Animal
     @person_id = attrs[:person_id]
   end
 
-  class << self
+  def save
+    if @id == nil
+    saved = DB.exec("INSERT INTO  animals (name, type, breed, gender, date, person_id) VALUES ('#{@name}', '#{@type}', '#{@breed}', '#{@gender}', '#{@date}', #{@person_id or 'NULL'}) RETURNING id;")
+      @id = saved.first["id"].to_i
+    else
+      DB.exec("UPDATE animals SET name = '#{@name}', type = '#{@type}', breed = '#{@breed}', gender = '#{@gender}', date = '#{@date}', person_id = #{@person_id or 'NULL'} WHERE id = #{@id};")
+    end
+  end
 
+  def ==(other)
+    @name == other.name && \
+    @type == other.type && \
+    @breed == other.breed && \
+    @gender == other.gender
+  end
+
+  def adopted_by(person)
+    @person_id = person.id
+  end
+
+  class << self
     def all
       DB.exec("Select * FROM animals;").map do |animal|
         Animal.new({
@@ -26,6 +45,7 @@ class Animal
         })
       end
     end
+
     def all_sorted_by(option)
       DB.exec("SELECT * FROM animals ORDER BY #{option.downcase};").map do |animal|
         Animal.new({
@@ -39,25 +59,5 @@ class Animal
         })
       end
     end
-  end #end of singleton
-
-  def save
-    if @id == nil
-    saved = DB.exec("INSERT INTO  animals (name, type, breed, gender, date, person_id) VALUES ('#{@name}', '#{@type}', '#{@breed}', '#{@gender}', '#{@date}', #{@person_id or 'NULL'}) RETURNING id;")
-      @id = saved.first["id"].to_i
-    else
-      DB.exec("UPDATE animals SET name = '#{@name}', type = '#{@type}', breed = '#{@breed}', gender = '#{@gender}', date = '#{@date}', person_id = #{@person_id or 'NULL'} WHERE id = #{@id};")
-    end
-  end
-
-  def ==(other)
-    @name == other.name and \
-    @type == other.type and \
-    @breed == other.breed and \
-    @gender == other.gender
-  end
-
-  def adopted_by(person)
-    @person_id = person.id
   end
 end
